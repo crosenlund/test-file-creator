@@ -14,7 +14,7 @@ function routes($stateProvider, $urlRouterProvider) {
     });
 }
 
-angular.module('fileCreator').controller('partNumberSearch', ['$scope', 'Upload', '$timeout', '$http', function ($scope, Upload, $timeout, $http) {
+angular.module('fileCreator').controller('partNumberSearch', ['$scope', '$timeout', '$http', function ($scope, $timeout, $http) {
     $scope.fields = [
         {name: 'TEST_PO_x', value: ""},
         {name: 'VENDOR_NUMBER', value: ""},
@@ -41,26 +41,6 @@ angular.module('fileCreator').controller('partNumberSearch', ['$scope', 'Upload'
         // console.log('TESTING');
         $scope.files = files;
         $scope.errFiles = errFiles;
-
-        // angular.forEach(files, function(file) {
-        //     file.upload = Upload.upload({
-        //         url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-        //         data: {file: file}
-        //     });
-        //
-        //     file.upload.then(function (response) {
-        //         $timeout(function () {
-        //             file.result = response.data;
-        //         });
-        //     }, function (response) {
-        //         if (response.status > 0)
-        //             $scope.errorMsg = response.status + ': ' + response.data;
-        //     }, function (evt) {
-        //         file.progress = Math.min(100, parseInt(100.0 *
-        //                                  evt.loaded / evt.total));
-        //     });
-        // });
-
     };
 
     $scope.submit = function () {
@@ -82,10 +62,7 @@ angular.module('fileCreator').controller('partNumberSearch', ['$scope', 'Upload'
             headers: {
                 'Content-Type': undefined
             }
-        }).
-
-
-        success(function (data) {
+        }).success(function (data) {
             console.log(data);
             var blob = new Blob([data], {type: "attachment;application/x-zip-compressed"});
             var fileDownload = angular.element('<a></a>');
