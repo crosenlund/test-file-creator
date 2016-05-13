@@ -64,21 +64,15 @@ angular.module('fileCreator').controller('partNumberSearch', ['$scope', '$timeou
             }
         }).success(function (data) {
             console.log(data);
-            var blob = new Blob([data], {type: "attachment;application/x-zip-compressed"});
+            var blob = new Blob([data], {type: "application/octet-stream"});
             var fileDownload = angular.element('<a></a>');
             var fileName = data.fileName;
             fileDownload.attr('href', window.URL.createObjectURL(blob));
             fileDownload.attr('download', 'testfilecreator.zip');
             fileDownload[0].click();
+            console.log('downloaded');
+
         });
 
-        // $http.post("create_test_files", fd,{ headers: {'Content-Type': undefined} , responseType: 'arraybuffer'}).success(function (data) {
-        //         var blob = new Blob([data], {type: "attachment;application/x-zip-compressed"});
-        //         var fileDownload = angular.element('<a></a>');
-        //         var fileName = data.fileName;
-        //         fileDownload.attr('href', window.URL.createObjectURL(blob));
-        //         fileDownload.attr('download', 'testfilecreator.zip');
-        //         fileDownload[0].click();
-        //     });
     }
 }]);

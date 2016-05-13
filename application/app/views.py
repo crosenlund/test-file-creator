@@ -1,6 +1,5 @@
 from flask import render_template, request, make_response, Response, json, send_file
 from app import app, creator
-import os
 
 # This script is the interface between the user interface in the form of webpages, and the classes that perform
 # the manipulations of data
@@ -28,8 +27,8 @@ def create_test_files():
         print('REGEX')
         print(zipfile)
         print(regex)
-        zipfile = 'zipTest.zip'
-        regex = {'Change Me!': "I was Changed!!!"}
+        # zipfile = 'zipTest.zip'
+        # regex = {'Change Me!': "I was Changed!!!"}
 
         folder_cleared = creator.clear_folder()
         if folder_cleared:
@@ -40,12 +39,6 @@ def create_test_files():
                     files_zipped = creator.zip_files()
                     if files_zipped:
                         # TODO add logic to download zipped file
-                        response = make_response('..\\testfilecreator.zip')
-                        response.headers["Content-Disposition"] = "attachment;filename=testfilecreator.zip"
-                        return response
-                        # print('returning zipped file')
-                        # return send_file('..\\testfilecreator.zip', attachment_filename='testfilecreator.zip', as_attachment=True)
-        return False
-    return True
+                        return send_file(app.config['DOWNLOAD_FOLDER'], as_attachment=True, attachment_filename='testfilecreator.zip')
 
-# create_test_files()
+        return False
