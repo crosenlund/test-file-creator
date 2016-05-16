@@ -6,9 +6,9 @@ angular.module('fileCreator').config(routes);
 routes.$inject = ['$stateProvider', '$urlRouterProvider'];
 function routes($stateProvider, $urlRouterProvider) {
     // console.log("routing");
-    $urlRouterProvider.otherwise('/part-search/');
+    $urlRouterProvider.otherwise('/');
     $stateProvider.state('part-search', {
-        url: '/part-search/',
+        url: '/',
         templateUrl: 'views/part-search.html',
         controller: 'partNumberSearch'
     });
