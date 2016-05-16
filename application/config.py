@@ -5,7 +5,8 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 BASE_FOLDER = basedir
 APP_FOLDER = BASE_FOLDER + '/app'
-ZIP_FOLDER = BASE_FOLDER + '\\testfilecreator'  # folder to zip
-DOWNLOAD_FOLDER = BASE_FOLDER + '/testfilecreator.zip'  # zipped foulder
+ZIP_FOLDER = BASE_FOLDER + '/testfilecreator'  # folder to zip
+DOWNLOAD_FOLDER = ZIP_FOLDER + '.zip'  # zipped foulder
+DEVELOPMENT = True
 
 SECRET_KEY = '0Zr98j/3yX R~XHH!jmN]LWX/,?RTA'

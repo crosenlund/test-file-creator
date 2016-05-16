@@ -9,7 +9,7 @@ function routes($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/part-search/');
     $stateProvider.state('part-search', {
         url: '/part-search/',
-        templateUrl: '/views/part-search.html',
+        templateUrl: 'views/part-search.html',
         controller: 'partNumberSearch'
     });
 }
@@ -46,12 +46,15 @@ angular.module('fileCreator').controller('partNumberSearch', ['$scope', '$timeou
     $scope.submit = function () {
         console.log($scope.newFields);
         console.log($scope.files);
+        var jsonData = JSON.stringify({
+            regex: $scope.newFields
+        });
 
         var fd = new FormData();
         angular.forEach($scope.files, function (file) {
             fd.append('zip', file);
         });
-        fd.append("data", $scope.newFields);
+        fd.append("data", jsonData);
 
         $http({
             url: "create_test_files",
@@ -62,15 +65,14 @@ angular.module('fileCreator').controller('partNumberSearch', ['$scope', '$timeou
             headers: {
                 'Content-Type': undefined
             }
-        }).success(function (data) {
-            console.log(data);
-            var blob = new Blob([data], {type: "application/octet-stream"});
-            var fileDownload = angular.element('<a></a>');
-            var fileName = data.fileName;
-            fileDownload.attr('href', window.URL.createObjectURL(blob));
-            fileDownload.attr('download', 'testfilecreator.zip');
-            fileDownload[0].click();
-            console.log('downloaded');
+            }).success(function (data) {
+                console.log(data);
+                var blob = new Blob([data], {type: "application/octet-stream"});
+                var fileDownload = angular.element('<a></a>');
+                fileDownload.attr('href', window.URL.createObjectURL(blob));
+                fileDownload.attr('download', 'testfilecreator.zip');
+                fileDownload[0].click();
+                console.log('downloaded');
 
         });
 
