@@ -28,7 +28,7 @@ def create_files(zipFile, regex):
     with zipfile.ZipFile(zipFile, 'r') as myzip:
         for file in myzip.infolist():
             with myzip.open(file.filename) as myfile:
-                with zipfile.ZipFile(fix_slashes(app.config['DOWNLOAD_FOLDER']), 'a',
+                with zipfile.ZipFile('testfilecreator.zip', 'a',
                                      compression=zipfile.ZIP_DEFLATED) as zippedfolder:
                     file_string = myfile.read()
                     for regex in regex_list:
